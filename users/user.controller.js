@@ -9,6 +9,8 @@ const validateRequest = require('../middleware/validate-request');
 router.get('/:id', getById);
 router.post('/', createSchema, create);
 router.put('/:id', updateSchema, update);
+router.post('/log-in', login);
+router.put('/log-out/:id', logout);
 
 module.exports = router;
 
@@ -17,6 +19,29 @@ module.exports = router;
 function getById(req, res, next) {
     userService.getById(req.params.id)
         .then(user => res.json(user))
+        .catch(next);
+}
+
+function login(req, res, next) {	
+    userService.getById(req.body.nickname)
+        .then(user => {
+	        if(user.password === req.body.password) {
+                userService.update(req.body.nickname, { isLogged: true });
+                res.json({ message: 'User logged in'});
+            } else {
+                res.json({ message: 'Wrong nickname or password'});
+            }
+            ;
+	})
+        .catch(next);
+}
+
+function logout(req, res, next) {	
+    userService.getById(req.params.id)
+        .then(user => {
+            userService.update(user.nickname, { isLogged: false });
+            res.json({ message: 'User logged out'});
+        })
         .catch(next);
 }
 
