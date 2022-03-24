@@ -1,0 +1,23 @@
+{
+  "name": "pokedex-api",
+  "version": "0.1.0",
+  "description": "pokedex api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pokedex",
+    "api"
+  ],
+  "author": "Sofia Quintana",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15",
+    "sequelize": "^6.17.0"
+  }
+}
